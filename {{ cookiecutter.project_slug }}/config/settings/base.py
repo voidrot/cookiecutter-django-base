@@ -195,7 +195,7 @@ LOGGING = {
 
 # External Services
 # ------------------------------------------------------------------------------
-REDIS_URL = env('REDIS_URL', default='redis://{% if cookiecutter.use_docker == 'y' %}redis{%else%}localhost{% endif %}:6379/0')
+REDIS_URL = env('REDIS_URL', default='redis://localhost:6379')
 REDIS_SSL = REDIS_URL.startswith('rediss://')
 
 # Celery
