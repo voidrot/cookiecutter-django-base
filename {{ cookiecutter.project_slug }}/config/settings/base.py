@@ -42,7 +42,6 @@ THIRD_PARTY_APPS = [
     'django_celery_beat',
     'dbbackup',
     'csp',
-    'compressor'
 ]
 
 LOCAL_APPS = [
