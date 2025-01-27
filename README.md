@@ -4,7 +4,7 @@ This is a base template for Django projects. It includes some common configurati
 
 This template is based on a lot of excellent work from the [cookiecutter-django](https://github.com/pydanny/cookiecutter-django) project, but stripped down to the bare essentials and simplified to use as a base for any Django project.
 
-## :heavy_exclamation_mark: :heavy_exclamation_mark: :heavy_exclamation_mark: IMPORTANT :heavy_exclamation_mark: :heavy_exclamation_mark: :heavy_exclamation_mark:
+## :heavy_exclamation_mark::heavy_exclamation_mark::heavy_exclamation_mark: IMPORTANT :heavy_exclamation_mark::heavy_exclamation_mark::heavy_exclamation_mark:
 
 This template is designed to be used as a base for new Django projects. It does not include all the batteries! If you are looking for a full-fledged Django project template, you should consider using the [cookiecutter-django](https://github.com/pydanny/cookiecutter-django) template instead.
 
