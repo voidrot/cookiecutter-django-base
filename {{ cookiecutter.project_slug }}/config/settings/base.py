@@ -42,6 +42,15 @@ THIRD_PARTY_APPS = [
     'django_celery_beat',
     'dbbackup',
     'csp',
+    'health_check',
+    'health_check.db',
+    'health_check.cache',
+    'health_check.storage',
+    'health_check.contrib.migrations',
+    'health_check.contrib.celery',
+    'health_check.contrib.celery_ping',
+    'health_check.contrib.psutil',
+    'health_check.contrib.redis',
 ]
 
 LOCAL_APPS = []
@@ -235,3 +244,18 @@ CACHEOPS_DEFAULTS = {
 # TODO: configure db backup storage and options
 DBBACKUP_STORAGE = 'django.core.files.storage.FileSystemStorage'
 DBBACKUP_STORAGE_OPTIONS = {'location': '/my/backup/dir/'}
+
+# django-health-check
+# ------------------------------------------------------------------------------
+# https://github.com/revsys/django-health-check
+HEALTHCHECK_CACHE_KEY = "zzz_healthcheck_key"
+# TODO: Configure health check settings as needed
+# HEALTH_CHECK = {
+#     'DISK_USAGE_MAX': 90,  # percent
+#     'MEMORY_MIN': 100,    # in MB
+#     "SUBSETS": {
+#         "startup-probe": ["MigrationsHealthCheck", "DatabaseBackend"],
+#         "liveness-probe": ["DatabaseBackend"],
+#         "<SUBSET_NAME>": ["<Health_Check_Service_Name>"]
+#     },
+# }
