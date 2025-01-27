@@ -78,7 +78,7 @@ CELERY_TASK_EAGER_PROPAGATES = True
 
 # django-zeal
 # ------------------------------------------------------------------------------
-INSTALLED_APPS += ['django_zeal']
+INSTALLED_APPS += ['zeal']
 MIDDLEWARE += ['zeal.middleware.zeal_middleware']
 
 # django-csp
