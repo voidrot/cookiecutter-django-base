@@ -7,6 +7,8 @@ from .base import env
 
 from config.utils import is_docker
 
+from csp.constants import NONE, SELF
+
 # GENERAL
 # ------------------------------------------------------------------------------
 DEBUG = True
