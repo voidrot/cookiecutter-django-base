@@ -93,7 +93,7 @@ CONTENT_SECURITY_POLICY_REPORT_ONLY = {
         'img-src': [SELF],
         'form-action': [SELF],
         'frame-ancestors': [SELF],
-        'script-src': [SELF, UNSAFE_EVAL],
+        'script-src': [SELF],
         'style-src': [SELF],
         'upgrade-insecure-requests': env('DJANGO_CSP_UPGRADE_INSECURE_REQUESTS', default=True),
         # 'report-uri': '/csp-report/',
