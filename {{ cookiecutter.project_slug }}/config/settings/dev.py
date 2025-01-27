@@ -102,7 +102,7 @@ CONTENT_SECURITY_POLICY_REPORT_ONLY = {
 
 # django-browser-reload
 # ------------------------------------------------------------------------------
-INSTALLED_APPS += 'django_browser_reload'
+INSTALLED_APPS += ['django_browser_reload']
 MIDDLEWARE += ['django_browser_reload.middleware.BrowserReloadMiddleware']
 
 # Project Specific Settings
