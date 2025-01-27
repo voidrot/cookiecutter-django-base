@@ -1,0 +1,71 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - main
+    # paths-ignore: []
+
+  push:
+    branches:
+      - main
+    # paths-ignore: []
+
+concurrency:
+  group: {% raw %}${{ github.head_ref || github.run_id }}{% endraw %}
+  cancel-in-progress: true
+
+env:
+  DOCKER_BUILDKIT: 1
+
+jobs:
+  linter:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version-file: '.python-version'
+
+      - name: Run pre-commit
+        uses: pre-commit/action@v3.0.1
+
+  pytest:
+    runs-on: ubuntu-latest
+    services:
+      redis:
+        image: valkey/valkey:latest
+        ports:
+          - '6379:6379'
+      postgres:
+        image: postgres:16-alpine
+        ports:
+          - '5432:5432'
+        env:
+          POSTGRES_PASSWORD: postgres
+    env:
+      REDIS_URL: 'redis://localhost:6379/0'
+      DATABASE_URL: 'postgres://postgres:postgres@localhost:5432/postgres'
+    steps:
+      - name: Checkout Code Repository
+        uses: actions/checkout@v4
+      - name: Install the latest version of uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: |
+            **/pyproject.toml
+            **/uv.lock
+      - name: Install Dependencies
+        run: uv sync --frozen
+      - name: Run pytest
+        run: pytest
+      - name: Check DB Migrations
+        run: uv run python manage.py makemigrations --check
+      - name: Run DB Migrations
+        run: uv run python manage.py migrate
+      - name: Test with pytest
+        run: uv run pytest
