@@ -1,5 +1,5 @@
 services:
-  app:
+  django: &django
     image: {{ cookiecutter.project_slug }}:latest
     ports:
       - "8000:8000"
@@ -8,6 +8,7 @@ services:
     depends_on:
       - database
       - valkey
+      - mailpit
     environment:
       - DEBUG=True
     env_file: .env.compose
@@ -33,6 +34,43 @@ services:
       - 6379:6379
     volumes:
       - valkey_data:/data
+
+  mailpit:
+    image: docker.io/axllent/mailpit:latest
+    ports:
+      - "8025:8025"
+      - "1025:1025"
+    env_file: .env.compose
+
+  celeryworker:
+    <<: *django
+    image: {{ cookiecutter.project_slug }}_worker
+    depends_on:
+      - valkey
+      - database
+      - mailpit
+    ports: []
+    command: worker
+
+   celerybeat:
+    <<: *django
+    image: {{ cookiecutter.project_slug }}_celerybeat
+    depends_on:
+      - valkey
+      - database
+      - mailpit
+    ports: []
+    command: beat
+
+  flower:
+    <<: *django
+    image: {{ cookiecutter.project_slug }}_flower
+    ports:
+      - '5555:5555'
+    command: 'flower'
+
+
+
 
 volumes:
   app_data:
