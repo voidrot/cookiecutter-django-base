@@ -39,7 +39,6 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    'django-extensions',
     'django_celery_beat',
     'dbbackup',
     'csp',
